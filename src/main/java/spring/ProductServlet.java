@@ -22,6 +22,9 @@ public class ProductServlet extends HttpServlet {
 
         final int amountInt = Integer.parseInt(amountOfProducts);
 
+        resp.getWriter().write("<h2> Корзина </h2>");
+
+
         List<Product> productList = new CopyOnWriteArrayList<>();
         for (int i = 0; i < amountInt; i++) {
             productList.add(new Product(i, "продукт" + i, 10 * i ));
@@ -29,6 +32,7 @@ public class ProductServlet extends HttpServlet {
 
         resp.getWriter().println(productList);
 
-
     }
 }
+
+

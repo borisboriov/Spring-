@@ -30,23 +30,9 @@ public class MainController {
         productService.deleteById(id);
     }
 
-    @GetMapping("/products/change_score")
+    @GetMapping("/products/change_rate")
     public void changeScore(@RequestParam Long productId, @RequestParam Integer delta) {
         productService.changeRate(productId, delta);
     }
-
-
-    //    @GetMapping("/products")
-//    public String ShowProducts(Model model) {
-//        model.addAttribute("products", productRepository.findAll());
-//        return "products_page";
-//    }
-//
-//    @GetMapping("/products/{id}")
-//    public String ShowProduct(Model model, @PathVariable Long id) {
-//        Product product = productRepository.findById(id);
-//        model.addAttribute("product", product);
-//        return "product_info_page";
-//    }
 
 }

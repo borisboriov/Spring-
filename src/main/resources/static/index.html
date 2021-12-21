@@ -15,19 +15,20 @@
 <body>
 
 <div class="container" ng-controller="indexController">
-    <h3>Product list</h3>
+    <h3>Product List</h3>
     <table class="table table-hover" cellpadding="0" cellspacing="0">
         <tr>
             <td>ID</td>
-            <td>Продукт</td>
-            <td>Цена</td>
-            <td>Рейтинг</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td>Rate</td>
+            <td>Action</td>
         </tr>
         <tbody>
         <tr ng-repeat="s in ProductsList">
             <td>{{s.id}}</td>
             <td>{{s.title}}</td>
-            <td>{{s.rate}}</td>
+            <td>{{s.cost}}</td>
 
             <td>
                 <button class="btn btn-primary" ng-click="changeRate(s.id, -5)">-</button>
@@ -35,7 +36,7 @@
                 <button class="btn btn-primary" ng-click="changeRate(s.id, 5)">+</button>
             </td>
             <td>
-                <button class="btn btn-danger" ng-click="deleteProduct(s.id)">Удалить</button>
+                <button class="btn btn-danger" ng-click="deleteProduct(s.id)">Delete</button>
             </td>
         </tr>
         </tbody>

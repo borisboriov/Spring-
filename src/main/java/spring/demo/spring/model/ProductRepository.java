@@ -32,8 +32,8 @@ public class ProductRepository {
     public Product findById(Long id) {
         return productList.stream()
                 .filter(s -> s.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .findFirst().get();
+
     }
 
     public void deleteById(Long id) {

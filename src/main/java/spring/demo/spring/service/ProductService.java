@@ -1,26 +1,38 @@
 package spring.demo.spring.service;
 
 import org.springframework.stereotype.Service;
+//import spring.demo.spring.Dao.ProductDaoImpl;
+import spring.demo.spring.Dao.ProductDaoImpl;
 import spring.demo.spring.model.Product;
-import spring.demo.spring.model.ProductRepository;
+import spring.demo.spring.repository.ProductRepository;
 
 import java.util.List;
 
 @Service
 public class ProductService {
+     private final ProductRepository productRepository;
+     private final ProductDaoImpl productDao;
 
-    private ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductDaoImpl productDao) {
         this.productRepository = productRepository;
+        this.productDao = productDao;
+    }
+
+
+    public Product findById(Long id){
+            return productDao.findById(id);
     }
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productDao.findAll();
     }
 
     public void deleteById(Long id) {
-        productRepository.deleteById(id);
+        productDao.deleteById(id);
+    }
+
+    public void save(Product product){
+        productDao.save(product);
     }
 
     public void changeRate(Long productId, Integer delta) {

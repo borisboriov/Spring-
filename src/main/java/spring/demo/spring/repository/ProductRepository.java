@@ -1,7 +1,8 @@
-package spring.demo.spring.model;
+package spring.demo.spring.repository;
 
 
 import org.springframework.stereotype.Component;
+import spring.demo.spring.model.Product;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;

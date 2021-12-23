@@ -1,13 +1,27 @@
 package spring.demo.spring.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "products")
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "cost")
     private Integer cost;
+
+    @Column(name = "rate")
     private Integer rate;
 
+    public Product() {
+    }
 
     public Product(Long id, String title, Integer cost, Integer rate) {
         this.id = id;
@@ -50,5 +64,14 @@ public class Product {
 
     public void setRate(Integer rate) {
         this.rate = rate;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", cost=" + cost +
+                '}';
     }
 }

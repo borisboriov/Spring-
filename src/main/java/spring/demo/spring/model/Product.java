@@ -72,6 +72,7 @@ public class Product {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", cost=" + cost +
+                ", rate=" + rate +
                 '}';
     }
 }

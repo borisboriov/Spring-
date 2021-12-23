@@ -1,20 +1,15 @@
 package spring.demo.spring.service;
 
 import org.springframework.stereotype.Service;
-//import spring.demo.spring.Dao.ProductDaoImpl;
 import spring.demo.spring.Dao.ProductDaoImpl;
 import spring.demo.spring.model.Product;
-import spring.demo.spring.repository.ProductRepository;
-
 import java.util.List;
 
 @Service
 public class ProductService {
-     private final ProductRepository productRepository;
      private final ProductDaoImpl productDao;
 
-    public ProductService(ProductRepository productRepository, ProductDaoImpl productDao) {
-        this.productRepository = productRepository;
+    public ProductService(ProductDaoImpl productDao) {
         this.productDao = productDao;
     }
 
@@ -36,8 +31,8 @@ public class ProductService {
     }
 
     public void changeRate(Long productId, Integer delta) {
-        Product product = productRepository.findById(productId);
+        Product product = productDao.findById(productId);
         product.setRate(product.getRate() + delta);
-
+        productDao.update(product);
     }
 }

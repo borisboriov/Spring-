@@ -13,4 +13,5 @@ public interface ProductDao {
     List<Product> findAll();
     void deleteById(Long id);
     void save(Product product);
+    void update(Product product);
 }

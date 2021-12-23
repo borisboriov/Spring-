@@ -3,7 +3,6 @@ package spring.demo.spring.repository;
 
 import org.springframework.stereotype.Component;
 import spring.demo.spring.model.Product;
-
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ public class ProductRepository {
     private List<Product> productList;
 
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         productList = new ArrayList<>(List.of(
                 new Product(1L, "Milk", 20, 10),

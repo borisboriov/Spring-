@@ -33,7 +33,16 @@ public class ProductService {
         productRepository.save(product);
     }
 
-//    public List<Product> findByPrice(int min, int max) {
-//        return productRepository.and
-//    }
+    public List<Product> findAllByCostBetween(int min, int max) {
+        return productRepository.findAllByCostBetween(min, max);
+    }
+
+    public List<Product> findGreaterThen(int min) {
+        return productRepository.findAllByCostGreaterThan(min);
+    }
+
+    public List<Product> findLessThen(int max) {
+        return productRepository.findAllByCostIsLessThan(max);
+    }
+
 }

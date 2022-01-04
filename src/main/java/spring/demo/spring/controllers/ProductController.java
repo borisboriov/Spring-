@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import spring.demo.spring.entities.Product;
+import spring.demo.spring.exeptions.ResourceNotFoundException;
 import spring.demo.spring.services.ProductService;
 
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +28,9 @@ public class ProductController {
         return productService.findAllProducts();
     }
 
-    @GetMapping("/product/{id}")
-    public Optional<Product> findProductById(@PathVariable Long id) {
-        return productService.findById(id);
+    @GetMapping("/products/{id}")
+    public Product findProductById(@PathVariable Long id) {
+        return productService.findById(id).orElseThrow(()-> new ResourceNotFoundException("Product not found, id:" + id));
     }
 
     @GetMapping("/products/delete/{id}")
@@ -43,10 +45,20 @@ public class ProductController {
     }
 
 
-//    @GetMapping("/products/search")
-//    public List<Product> findByPrice(@RequestParam(required = false) int min , @RequestParam(required = false) int max){
-//        return productService.findByPrice(min, max);
-//    }
+    @GetMapping("/products/find_between")
+    public List<Product> findMax(@RequestParam(required = false) int min , @RequestParam(required = false) int max){
+        return productService.findAllByCostBetween(min, max);
+    }
+
+    @GetMapping("/products/find_greater")
+    public List<Product> findGreaterThen(@RequestParam(required = false) int min){
+        return productService.findGreaterThen(min);
+    }
+
+    @GetMapping("/products/find_less")
+    public List<Product> findLessThen(@RequestParam(required = false) int max){
+        return productService.findLessThen(max);
+    }
 
 }
 //3 К запросу всех товаров добавьте возможность фильтрации по минимальной и максимальной цене

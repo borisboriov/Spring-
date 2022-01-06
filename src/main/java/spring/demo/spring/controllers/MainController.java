@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import spring.demo.spring.model.Product;
+import spring.demo.spring.entities.Product;
 import spring.demo.spring.service.ProductService;
 
 import java.util.List;
@@ -20,19 +20,11 @@ public class MainController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
-    public List<Product> showAllProducts() {
-        return productService.getAllProducts();
-    }
 
-    @GetMapping("/products/delete/{id}")
-    public void deleteProduct(@PathVariable Long id) {
-        productService.deleteById(id);
-    }
 
-    @GetMapping("/products/change_rate")
-    public void changeScore(@RequestParam Long productId, @RequestParam Integer delta) {
-        productService.changeRate(productId, delta);
-    }
+//    @GetMapping("/products/change_rate")
+//    public void changeScore(@RequestParam Long productId, @RequestParam Integer delta) {
+//        productService.changeRate(productId, delta);
+//    }
 
 }

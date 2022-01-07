@@ -4,7 +4,6 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.loadProducts = function () {
         $http.get(contextPath + '/products')
             .then(function (response) {
-                console.log(response.data)
                 $scope.ProductsList = response.data;
             });
     };
@@ -27,6 +26,22 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
 
         }).then(function (response) {
             $scope.loadProducts();
+        });
+    }
+
+    $scope.Filter = function (min, max) {
+        console.log($scope.filter);
+        $http({
+            url: contextPath + '/products/search_between',
+            method: 'get',
+            params: {
+                min: min,
+                max: max
+            }
+
+        }).then(function (response) {
+            console.log(response.data)
+            $scope.ProductsList = response.data;
         });
     }
 

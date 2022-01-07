@@ -37,9 +37,12 @@ public class ProductController {
         productService.save(new Product(title, cost, rate));
     }
 
-
     @GetMapping("/products/find_between")
-    public List<Product> findMax(@RequestParam(required = false) int min, @RequestParam(required = false) int max) {
+    public List<Product> findMax(@RequestParam(defaultValue = "0") int min, @RequestParam(defaultValue = "0") int max) {
+        return productService.findAllByCostBetween(min, max);
+    }
+    @GetMapping("/products/search_between")
+    public List<Product> searchBetween(@RequestParam(required = false) int min, @RequestParam(required = false) int max) {
         return productService.findAllByCostBetween(min, max);
     }
 

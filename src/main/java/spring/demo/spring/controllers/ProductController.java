@@ -24,7 +24,7 @@ public class ProductController {
 
     @GetMapping("/products/{id}")
     public Product findProductById(@PathVariable Long id) {
-        return productService.findById(id).orElseThrow(()-> new ResourceNotFoundException("Product not found, id:" + id));
+        return productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id:" + id));
     }
 
     @GetMapping("/products/delete/{id}")
@@ -37,12 +37,14 @@ public class ProductController {
         productService.save(new Product(title, cost, rate));
     }
 
-    @GetMapping("/products/find_between")
-    public List<Product> findMax(@RequestParam(defaultValue = "0") int min, @RequestParam(defaultValue = "0") int max) {
-        return productService.findAllByCostBetween(min, max);
+    @GetMapping("/products/change_rate")
+    public void changeRate(@RequestParam Long productId, @RequestParam Integer delta) {
+        productService.changeRate(productId, delta);
     }
-    @GetMapping("/products/search_between")
-    public List<Product> searchBetween(@RequestParam(required = false) int min, @RequestParam(required = false) int max) {
+
+
+    @GetMapping("/products/find_between")
+    public List<Product> find_between(@RequestParam(required = false) int min, @RequestParam(required = false) int max) {
         return productService.findAllByCostBetween(min, max);
     }
 

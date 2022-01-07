@@ -32,7 +32,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.Filter = function (min, max) {
         console.log($scope.filter);
         $http({
-            url: contextPath + '/products/search_between',
+            url: contextPath + '/products/find_between',
             method: 'get',
             params: {
                 min: min,

@@ -1,18 +1,16 @@
 package spring.demo.spring.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import spring.demo.spring.entities.Product;
 import spring.demo.spring.exceptions.ResourceNotFoundException;
 import spring.demo.spring.service.ProductService;
+
 import java.util.List;
 
 @RestController
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
@@ -34,25 +32,24 @@ public class ProductController {
         productService.deleteByID(id);
     }
 
-    //для сохранения продукта тут, пришлось создать отдельный конструктор без инта в сигнатуре
     @GetMapping("/products/save/")
-    public void save(@RequestParam String title, @RequestParam int cost) {
-        productService.save(new Product(title, cost));
+    public void save(@RequestParam String title, @RequestParam Integer cost, @RequestParam Integer rate) {
+        productService.save(new Product(title, cost, rate));
     }
 
 
     @GetMapping("/products/find_between")
-    public List<Product> findMax(@RequestParam(required = false) int min , @RequestParam(required = false) int max){
+    public List<Product> findMax(@RequestParam(required = false) int min, @RequestParam(required = false) int max) {
         return productService.findAllByCostBetween(min, max);
     }
 
     @GetMapping("/products/find_greater")
-    public List<Product> findGreaterThen(@RequestParam(required = false) int min){
+    public List<Product> findGreaterThen(@RequestParam(required = false) int min) {
         return productService.findGreaterThen(min);
     }
 
     @GetMapping("/products/find_less")
-    public List<Product> findLessThen(@RequestParam(required = false) int max){
+    public List<Product> findLessThen(@RequestParam(required = false) int max) {
         return productService.findLessThen(max);
     }
 

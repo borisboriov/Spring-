@@ -4,6 +4,7 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     $scope.loadProducts = function () {
         $http.get(contextPath + '/products')
             .then(function (response) {
+                console.log(response.data)
                 $scope.ProductsList = response.data;
             });
     };
@@ -23,10 +24,12 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
                 productId: productId,
                 delta: delta
             }
+
         }).then(function (response) {
             $scope.loadProducts();
         });
     }
 
     $scope.loadProducts();
+
 });

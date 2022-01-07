@@ -56,10 +56,12 @@ public class Product {
         this.cost = cost;
     }
 
-    public Product(String title, int cost) {
+    public Product(String title, int cost, int rate) {
         this.id = id;
         this.title = title;
         this.cost = cost;
+        this.rate = rate;
+
     }
 
 }

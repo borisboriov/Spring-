@@ -22,9 +22,9 @@ public class MainController {
 
 
 
-//    @GetMapping("/products/change_rate")
-//    public void changeScore(@RequestParam Long productId, @RequestParam Integer delta) {
-//        productService.changeRate(productId, delta);
-//    }
+    @GetMapping("/products/change_rate")
+    public void changeRate(@RequestParam Long productId, @RequestParam Integer delta) {
+        productService.changeRate(productId, delta);
+    }
 
 }

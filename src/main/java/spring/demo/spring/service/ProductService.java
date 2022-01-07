@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import spring.demo.spring.entities.Product;
 import spring.demo.spring.repositories.ProductRepository;
 
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,12 +18,14 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+//с подключением spring data при выдергинвании продукта из репозитория требуется, что бы он был optional.
+//я чего тут только не воротил, но метод так и не заработал. rate у продукта не меняется (при попытке изменить его с фронта)
+    public void changeRate(Long productId, Integer delta) {
+        Product product = productRepository.findById(productId).orElseThrow(ReadOnlyFileSystemException::new);
+        product.setRate(product.getRate() + delta);
 
-//    public void changeRate(Long productId, Integer delta) {
-//        Product product = productRepository.findById(productId);
-//        product.setRate(product.getRate() + delta);
-//
-//    }
+    }
+
 
     public List<Product> findAllProducts() {
         return productRepository.findAll();

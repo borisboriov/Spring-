@@ -28,7 +28,6 @@ public class ProductController {
         if (page < 1) {
             page = 1;
         }
-
         return productService.find(minRate, maxRate, titlePart, page);
     }
 

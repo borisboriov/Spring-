@@ -1,9 +1,14 @@
 package spring.demo.spring.service;
 
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import spring.demo.spring.entities.Product;
 import spring.demo.spring.repositories.ProductRepository;
+import spring.demo.spring.specifications.ProductSpecifications;
 
 import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
@@ -18,7 +23,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-//с подключением spring data при выдергинвании продукта из репозитория требуется, что бы он был optional.
+    //с подключением spring data при выдергинвании продукта из репозитория требуется, что бы он был optional.
 //я чего тут только не воротил, но метод так и не заработал. rate у продукта не меняется (при попытке изменить его с фронта)
     public void changeRate(Long productId, Integer delta) {
         Product product = productRepository.findById(productId).orElseThrow(ReadOnlyFileSystemException::new);
@@ -26,7 +31,21 @@ public class ProductService {
 
     }
 
+    public Page<Product> find(Integer minRate, Integer maxRate, String partTitle, Integer page) {
+        Specification<Product> specification = Specification.where(null);
+        if (minRate != null) {
+            specification = specification.and(ProductSpecifications.rateGreaterOrEqualsThan(minRate));
+        }
+        if (maxRate != null) {
+            specification = specification.and(ProductSpecifications.rateLessOrEqualsThan(maxRate));
+        }
+        if (partTitle != null) {
+            specification = specification.and(ProductSpecifications.titleLike(partTitle));
+        }
+        return productRepository.findAll(specification, PageRequest.of(page - 1, 5));
+    }
 
+    //old version
     public List<Product> findAllProducts() {
         return productRepository.findAll();
     }

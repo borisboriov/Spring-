@@ -1,5 +1,6 @@
 package spring.demo.spring.controllers;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import spring.demo.spring.entities.Product;
 import spring.demo.spring.exceptions.ResourceNotFoundException;
@@ -18,8 +19,17 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public List<Product> findAllProducts() {
-        return productService.findAllProducts();
+    public Page<Product> findAllProducts(
+            @RequestParam(name = "p", defaultValue = "1") Integer page,
+            @RequestParam(name = "min_rate", required = false) Integer minRate,
+            @RequestParam(name = "max_rate", required = false) Integer maxRate,
+            @RequestParam(name = "title_part", required = false) String titlePart
+    ) {
+        if (page < 1) {
+            page = 1;
+        }
+
+        return productService.find(minRate, maxRate, titlePart, page);
     }
 
     @GetMapping("/products/{id}")

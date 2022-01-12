@@ -1,5 +1,5 @@
 angular.module('app', []).controller('indexController', function ($scope, $http) {
-    const contextPath = 'http://localhost:8189/app';
+    const contextPath = 'http://localhost:8189/app/api/v1';
 
     $scope.loadProducts = function (pageIndex = 1) {
         $http({
@@ -16,38 +16,30 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
     };
 
     $scope.deleteProduct = function (productId) {
-        $http.get(contextPath + '/products/delete/' + productId)
+        $http.delete(contextPath + '/products/' + productId)
             .then(function (response) {
+                $scope.loadProducts();
+            });
+    }
+
+    $scope.createProductJson = function (){
+        console.log($scope.newProductJson);
+        $http.post(contextPath + '/products', $scope.newProductJson)
+            .then(function (response){
                 $scope.loadProducts();
             });
     }
 
     $scope.changeRate = function (productId, delta) {
         $http({
-            url: contextPath + '/products/change_rate',
-            method: 'GET',
+            url: contextPath + '/products',
+            method: 'PUT',
             params: {
                 productId: productId,
                 delta: delta
             }
         }).then(function (response) {
             $scope.loadProducts();
-        });
-    }
-
-    $scope.Filter = function (min, max) {
-        console.log($scope.filter);
-        $http({
-            url: contextPath + '/products/find_between',
-            method: 'get',
-            params: {
-                min: min,
-                max: max
-            }
-
-        }).then(function (response) {
-            console.log(response.data)
-            $scope.ProductsList = response.data;
         });
     }
 

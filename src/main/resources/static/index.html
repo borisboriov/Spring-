@@ -34,15 +34,15 @@
         </form>
 
     <p></p>
-    <h3>Filter products by price</h3>
-    <form novalidate ng-submit="Filter(filter.min, filter.max)">
-        <input class="form-control" type="text" placeholder="min" ng-model="filter.min">
-        <p></p>
-        <input class="form-control" type="number" placeholder="max" ng-model="filter.max">
-        <p></p>
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </form>
-    <p></p>
+<!--    <h3>Filter products by price</h3>-->
+<!--    <form novalidate ng-submit="Filter(filter.min, filter.max)">-->
+<!--        <input class="form-control" type="text" placeholder="min" ng-model="filter.min">-->
+<!--        <p></p>-->
+<!--        <input class="form-control" type="number" placeholder="max" ng-model="filter.max">-->
+<!--        <p></p>-->
+<!--        <button type="submit" class="btn btn-primary">Filter</button>-->
+<!--    </form>-->
+<!--    <p></p>-->
 
     <h3>Product List</h3>
     <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -70,6 +70,17 @@
         </tr>
         </tbody>
     </table>
+
+    <h3>Add product JSON</h3>
+    <form novalidate ng-submit="createProductJson()">
+        <input class="form-control" type="text" placeholder="Title" ng-model="newProductJson.title">
+        <p></p>
+        <input class="form-control" type="number" placeholder="Cost" ng-model="newProductJson.cost">
+        <p></p>
+        <input class="form-control" type="number" placeholder="Rate" ng-model="newProductJson.rate">
+        <p></p>
+        <button type="submit" class="btn btn-primary">Save JSON product</button>
+    </form>
 
 </div>
 </body>

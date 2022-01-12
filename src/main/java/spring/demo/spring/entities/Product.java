@@ -21,6 +21,13 @@ public class Product {
     @Column(name = "rate")
     private int rate;
 
+    public Product(Long id, String title, int cost, int rate) {
+        this.id = id;
+        this.title = title;
+        this.cost = cost;
+        this.rate = rate;
+    }
+
     public int getRate() {
         return rate;
     }
@@ -54,14 +61,6 @@ public class Product {
 
     public void setCost(int cost) {
         this.cost = cost;
-    }
-
-    public Product(String title, int cost, int rate) {
-        this.id = id;
-        this.title = title;
-        this.cost = cost;
-        this.rate = rate;
-
     }
 
 }

@@ -21,10 +21,13 @@ public class CartController {
     private final ProductConverter productConverter;
 
 
+    // Этот метод выдает такую ошибку:
+//Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long';
+// nested exception is java.lang.NumberFormatException: For input string: "undefined"]
+// не могу понять почему в метод не долетает корректные данные
     @DeleteMapping("/{id}")
     public void deleteByID(@PathVariable Long id) {
-        log.error("xx" + id);
-        System.out.println(id);
+        log.error(id + "!!!");
         cartService.deleteByID(id);
     }
 

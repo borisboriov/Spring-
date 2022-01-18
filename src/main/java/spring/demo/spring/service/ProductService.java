@@ -1,11 +1,13 @@
 package spring.demo.spring.service;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import spring.demo.spring.dto.ProductDto;
 import spring.demo.spring.entities.Product;
 import spring.demo.spring.exceptions.ResourceNotFoundException;
 import spring.demo.spring.repositories.ProductRepository;
@@ -14,14 +16,10 @@ import spring.demo.spring.specifications.ProductSpecifications;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
-
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
 
     @Transactional
     public void changeRate(Long productID, Integer delta) {
@@ -29,7 +27,7 @@ public class ProductService {
         product.setRate(product.getRate() + delta);
     }
 
-    public Page<Product> find(Integer minRate, Integer maxRate, String partTitle, Integer page) {
+    public Page<Product> findAll(Integer minRate, Integer maxRate, String partTitle, Integer page) {
         Specification<Product> specification = Specification.where(null);
         if (minRate != null) {
             specification = specification.and(ProductSpecifications.rateGreaterOrEqualsThan(minRate));
@@ -40,7 +38,7 @@ public class ProductService {
         if (partTitle != null) {
             specification = specification.and(ProductSpecifications.titleLike(partTitle));
         }
-        return productRepository.findAll(specification, PageRequest.of(page - 1, 5));
+        return productRepository.findAll(specification, PageRequest.of(page - 1, 10));
     }
 
     public Optional<Product> findById(Long id) {
@@ -53,6 +51,15 @@ public class ProductService {
 
     public Product save(Product product) {
         return productRepository.save(product);
+    }
+
+    @Transactional
+    public Product update(ProductDto productDto) {
+        Product product = productRepository.findById(productDto.getId()).orElseThrow(() -> new ResourceNotFoundException("Not update! Product not found " + productDto.getId()));
+        product.setCost(product.getCost());
+        product.setTitle(product.getTitle());
+        product.setRate(productDto.getRate());
+        return product;
     }
 
 

@@ -22,10 +22,10 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     }
 
-    $scope.createProductJson = function (){
+    $scope.createProductJson = function () {
         console.log($scope.newProductJson);
         $http.post(contextPath + '/products', $scope.newProductJson)
-            .then(function (response){
+            .then(function (response) {
                 $scope.loadProducts();
             });
     }
@@ -42,6 +42,35 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             $scope.loadProducts();
         });
     }
+
+
+//Cart methods --------------------------------------------
+    $scope.addToCart = function (product) {
+        $http({
+            url: contextPath + '/carts/add/',
+            method: 'POST',
+            data: product
+        })
+            .then(function (response) {
+                $scope.CartList = response.data;
+            })
+    }
+
+    $scope.deleteProductFromCart = function (productId) {
+        $http.delete(contextPath + '/carts/' + productId)
+            .then(function (response) {
+                $scope.CartList = response.data;
+            });
+    }
+
+    $scope.clearCart = function () {
+        $http.delete(contextPath + '/carts')
+            .then(function (response) {
+                $scope.CartList = response.data;
+            });
+    }
+//Cart methods --------------------------------------------
+
 
     $scope.loadProducts();
 

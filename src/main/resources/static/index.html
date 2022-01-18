@@ -14,35 +14,26 @@
 <body>
 <div class="container" ng-controller="indexController">
 
-        <form novalidate ng-submit="loadProducts()">
-            <div class="form-floating input-group-sm">
-                <label for="filterTitle">Product Title</label>
-                <input type="text" class="form-control" id="filterTitle" placeholder="" ng-model="filter.title_part">
-            </div>
-            <p></p>
-            <div class="form-floating input-group-sm">
-                <label for="filterMinRate">Min Rate</label>
-                <input type="number" class="form-control" id="filterMinRate" placeholder="" ng-model="filter.min_rate">
-            </div>
-            <p></p>
-            <div class="form-floating input-group-sm">
-                <label for="filterMaxRate">Max Rate</label>
-                <input type="number" class="form-control" id="filterMaxRate" placeholder="" ng-model="filter.max_rate">
-            </div>
-            <p></p>
-            <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Accept</button>
-        </form>
+    <form novalidate ng-submit="loadProducts()">
+        <div class="form-floating input-group-sm">
+            <label for="filterTitle">Product Title</label>
+            <input type="text" class="form-control" id="filterTitle" placeholder="" ng-model="filter.title_part">
+        </div>
+        <p></p>
+        <div class="form-floating input-group-sm">
+            <label for="filterMinRate">Min Rate</label>
+            <input type="number" class="form-control" id="filterMinRate" placeholder="" ng-model="filter.min_rate">
+        </div>
+        <p></p>
+        <div class="form-floating input-group-sm">
+            <label for="filterMaxRate">Max Rate</label>
+            <input type="number" class="form-control" id="filterMaxRate" placeholder="" ng-model="filter.max_rate">
+        </div>
+        <p></p>
+        <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Accept</button>
+    </form>
 
     <p></p>
-<!--    <h3>Filter products by price</h3>-->
-<!--    <form novalidate ng-submit="Filter(filter.min, filter.max)">-->
-<!--        <input class="form-control" type="text" placeholder="min" ng-model="filter.min">-->
-<!--        <p></p>-->
-<!--        <input class="form-control" type="number" placeholder="max" ng-model="filter.max">-->
-<!--        <p></p>-->
-<!--        <button type="submit" class="btn btn-primary">Filter</button>-->
-<!--    </form>-->
-<!--    <p></p>-->
 
     <h3>Product List</h3>
     <table class="table table-hover" cellpadding="0" cellspacing="0">
@@ -53,23 +44,53 @@
             <td>Rate</td>
             <td>Action</td>
         </tr>
-        <tbody>
+        <tbxody>
         <tr ng-repeat="s in ProductsList">
             <td>{{s.id}}</td>
             <td>{{s.title}}</td>
             <td>{{s.cost}}</td>
-
             <td>
                 <button class="btn btn-primary" ng-click="changeRate(s.id, -5)">-</button>
                 {{s.rate}}
                 <button class="btn btn-primary" ng-click="changeRate(s.id, 5)">+</button>
+                <button type="button" class="btn btn-success" ng-click="addToCart(s)">Add to cart</button>
             </td>
             <td>
                 <button class="btn btn-danger" ng-click="deleteProduct(s.id)">Delete</button>
             </td>
         </tr>
-        </tbody>
+        </tbxody>
     </table>
+
+    <h3>Cart</h3>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>ID</td>
+            <td>Title</td>
+            <td>Price</td>
+            <td>Amount</td>
+            <td>Action</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in CartList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.cost}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="changeRate(p.id, -5)">-</button>
+                {{p.rate}}
+                <button class="btn btn-primary" ng-click="changeRate(p.id, 5)">+</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteProductFromCart(s.id)">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+        <td>
+            <button class="btn btn-danger" ng-click="clearCart()">Clear Cart</button>
+        </td>
+    </table>
+
 
     <h3>Add product JSON</h3>
     <form novalidate ng-submit="createProductJson()">

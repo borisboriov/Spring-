@@ -15,10 +15,10 @@ public class MainController {
         this.productService = productService;
     }
 
-    //реализовал save() таким образом, потому, что на фронте пока тяжеловато, а времени делать формы нет((((
+    //реализовал saveNewOrUpdate() таким образом, потому, что на фронте пока тяжеловато, а времени делать формы нет((((
     @GetMapping("/products/save/{id}")
-    public void save(@PathVariable Long id, @RequestParam String title, @RequestParam int cost, @RequestParam int rate) {
-        productService.save(new Product(id, title, cost, rate));
+    public void saveNewOrUpdate(@PathVariable Long id, @RequestParam String title, @RequestParam int cost, @RequestParam int rate) {
+        productService.saveOrUpdate(new Product(id, title, cost, rate));
     }
 
     @GetMapping("/products")

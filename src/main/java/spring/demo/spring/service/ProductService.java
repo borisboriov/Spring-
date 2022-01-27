@@ -26,13 +26,13 @@ public class ProductService {
         productDao.deleteById(id);
     }
 
-    public void save(Product product){
-        productDao.save(product);
-    }
-
     public void changeRate(Long productId, Integer delta) {
         Product product = productDao.findById(productId);
         product.setRate(product.getRate() + delta);
-        productDao.update(product);
+        productDao.saveOrUpdate(product);
+    }
+    public Product saveOrUpdate(Product product){
+        productDao.saveOrUpdate(product);
+        return product;
     }
 }

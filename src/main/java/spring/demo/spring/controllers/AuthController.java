@@ -1,10 +1,6 @@
 package spring.demo.spring.controllers;
 
-import com.geekbrains.spring.web.dto.JwtRequest;
-import com.geekbrains.spring.web.dto.JwtResponse;
-import com.geekbrains.spring.web.exceptions.AppError;
-import com.geekbrains.spring.web.services.UserService;
-import com.geekbrains.spring.web.utils.JwtTokenUtil;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import spring.demo.spring.dto.JwtRequest;
+import spring.demo.spring.dto.JwtResponse;
+import spring.demo.spring.exceptions.AppError;
+import spring.demo.spring.service.UserService;
+import spring.demo.spring.utils.JwtTokenUtil;
 
 @RestController
 @RequiredArgsConstructor

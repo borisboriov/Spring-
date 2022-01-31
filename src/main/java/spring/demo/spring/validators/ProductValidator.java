@@ -19,7 +19,7 @@ public class ProductValidator {
         if (productDto.getTitle().isBlank()){
              errors.add("Title input cant be  empty");
         }
-        if (errors.isEmpty()){
+        if (!errors.isEmpty()){
             throw  new ValidationException(errors);
         }
     }
